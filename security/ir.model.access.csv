@@ -22,3 +22,5 @@ access_hr_salary_rule_user,hr.salary.rule.user,model_hr_salary_rule,hr_payroll_c
 
 access_hr_contract_advantage_template,hr.contract.advantage.template.user,model_hr_contract_advantage_template,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
 access_hr_contract_advantage_template_hr_user,hr.contract.advantage.template.hr.user,model_hr_contract_advantage_template,hr.group_hr_user,1,0,0,0
+
+access_hr_pay_scale,hr.pay_scale,model_hr_pay_scale,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1

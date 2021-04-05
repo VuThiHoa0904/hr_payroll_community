@@ -155,7 +155,7 @@ class HrSalaryRule(models.Model):
                     # employee: hr.employee object
                     # contract: hr.contract object
                     # rules: object containing the rules code (previously computed)
-                    # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                    # categories: object containamounting the computed salary rule categories (sum of amount of all rules belonging to that category).
                     # worked_days: object containing the computed worked days.
                     # inputs: object containing the computed inputs.
 
@@ -251,3 +251,16 @@ class HrPayscale(models.Model):
     code = fields.Char('Code', required=True)
     currency_id = fields.Many2one('res.currency', string='Currency')
     money = fields.Monetary("Amount of money")
+    
+    def _get_currency(self, cr, uid, context=None):
+        user_obj = self.pool.get('res.users')
+        currency_obj = self.pool.get('res.currency')
+        user = user_obj.browse(cr, uid, uid, context=context)
+
+        if user.company_id:
+            return user.company_id.currency_id.id
+        else:
+            return currency_obj.search(cr, uid, [('rate', '=', 1.0)])[0]
+    _defaults = {      
+            'currency': _get_currency,
+     }

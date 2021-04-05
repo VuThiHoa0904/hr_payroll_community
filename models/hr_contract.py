@@ -29,6 +29,7 @@ class HrContract(models.Model):
     meal_allowance = fields.Monetary(string="Meal Allowance", help="Meal allowance")
     medical_allowance = fields.Monetary(string="Medical Allowance", help="Medical allowance")
     other_allowance = fields.Monetary(string="Other Allowance", help="Other allowances")
+    pay_scale_id = fields.Many2one('hr.pay.scale', string="Lương cấp bậc", help="Lương cấp bậc")
 
     def get_all_structures(self):
         """

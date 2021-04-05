@@ -66,6 +66,11 @@
             <field name="code">Other</field>
         </record>
 
+        <record id="Other" model="hr.salary.rule.category">
+            <field name="name">Bảo hiểm</field>
+            <field name="code">BH</field>
+        </record>
+
 
 <!--        <record id="DEDUCTION" model="hr.salary.rule.category">-->
 <!--            <field name="name">Deduction</field>-->
@@ -83,6 +88,16 @@
             <field name="amount_python_compute">result = contract.wage</field>
         </record>
 
+<!--        <record id="hr_rule_basic" model="hr.salary.rule">-->
+<!--            <field name="name">Basic Salary</field>-->
+<!--            <field name="sequence" eval="1"/>-->
+<!--            <field name="code">BASIC</field>-->
+<!--            <field name="category_id" ref="hr_payroll_community.BASIC"/>-->
+<!--            <field name="condition_select">none</field>-->
+<!--            <field name="amount_select">code</field>-->
+<!--            <field name="amount_python_compute">result = contract.pay_scale_id.money</field>-->
+<!--        </record>-->
+
         <record id="hr_rule_taxable" model="hr.salary.rule">
             <field name="name">Gross</field>
             <field name="sequence" eval="100"/>
@@ -90,7 +105,7 @@
             <field name="category_id" ref="hr_payroll_community.GROSS"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = categories.BASIC + categories.ALW</field>
+            <field name="amount_python_compute">result = (categories.BASIC/26)* + categories.ALW</field>
         </record>
 
         <record id="hr_rule_net" model="hr.salary.rule">

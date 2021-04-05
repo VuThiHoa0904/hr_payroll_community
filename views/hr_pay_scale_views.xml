@@ -2,8 +2,40 @@
 <odoo>
 
 
+    <record id="view_hr_pay_scale_tree" model="ir.ui.view">
+        <field name="name">hr.pay.scale.tree</field>
+        <field name="model">hr.pay.scale</field>
+        <field name="arch" type="xml">
+            <tree string="Cấp bậc lương" editable="bottom" create="true" delete="true">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="money" options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_pay_scale_form" model="ir.ui.view">
+        <field name="name">hr.pay.scale.form</field>
+        <field name="model">hr.pay.scale</field>
+        <field name="arch" type="xml">
+            <form string="Pay Scale">
+            <sheet>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name" placeholder="Name"/></h1>
+                </div>
+                <group col="4">
+                    <field name="code"/>
+                    <field name="money"/>
+                    <field name="currency_id" invisible="1"/>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <record id="action_view_hr_pay_scale_form" model="ir.actions.act_window">
-        <field name="name">Pay Scale</field>
+        <field name="name">Cấp bậc lương</field>
         <field name="res_model">hr.pay.scale</field>
         <field name="view_mode">tree,kanban,form</field>
 <!--        <field name="search_view_id" ref="hr_payslip_run_filter"/>-->

@@ -23,6 +23,13 @@
             <xpath expr="//field[@name='resource_calendar_id']" position="after">
                 <field name="schedule_pay"/>
             </xpath>
+            <xpath expr="//group[@name='salary_and_advantages']" position="inside">
+                <label for="pay_scale_id"/>
+                <div class="o_row">
+                    <field name="pay_scale_id" nolabel="1"/>
+<!--                    <span>/ month</span>-->
+                </div>
+            </xpath>
         </field>
     </record>
 

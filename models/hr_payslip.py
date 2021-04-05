@@ -78,6 +78,18 @@ class HrPayslip(models.Model):
                                      copy=False, states={'draft': [('readonly', False)]})
     payslip_count = fields.Integer(compute='_compute_payslip_count', string="Payslip Computation Details")
 
+    # Hoa
+
+    # attendance_sheet_line_id = fields.Many2one("attendance.sheet.line")
+
+    worked_days_real = fields.Float("Ngày công làm việc thực tế", compute='get_worked_days_real')
+
+    @api.depends('employee_id')
+    def get_worked_days_real(self):
+        attendance_sheet_line_id = self.env['attendance.sheet.line'].search([('name', '=', self.employee_id.id),['month', '=', self.date_from.month]], )
+        self.worked_days_real = attendance_sheet_line_id.percentage
+
+
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
@@ -556,6 +568,21 @@ class HrPayslipWorkedDays(models.Model):
     number_of_hours = fields.Float(string='Number of Hours', help="Number of hours worked")
     contract_id = fields.Many2one('hr.contract', string='Contract', required=True,
                                   help="The contract for which applied this input")
+    # currency_id = fields.Many2one('res.currency', string='Currency')
+    # base_salary_day = fields.Monetary('Day’s wages')
+    #
+    # def _get_currency(self, cr, uid, context=None):
+    #     user_obj = self.pool.get('res.users')
+    #     currency_obj = self.pool.get('res.currency')
+    #     user = user_obj.browse(cr, uid, uid, context=context)
+    #
+    #     if user.company_id:
+    #         return user.company_id.currency_id.id
+    #     else:
+    #         return currency_obj.search(cr, uid, [('rate', '=', 1.0)])[0]
+    # _defaults = {
+    #         'currency': _get_currency,
+    #  }
 
 
 class HrPayslipInput(models.Model):
