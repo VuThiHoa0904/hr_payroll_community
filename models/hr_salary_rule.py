@@ -191,6 +191,7 @@ class HrSalaryRule(models.Model):
         :rtype: (float, float, float)
         """
         self.ensure_one()
+        # print(contract.pay_scale_id.money)
         if self.amount_select == 'fix':
             try:
                 return self.amount_fix, float(safe_eval(self.quantity, localdict)), 100.0
